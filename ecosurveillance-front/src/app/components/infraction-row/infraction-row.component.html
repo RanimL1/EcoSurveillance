@@ -1,0 +1,11 @@
+<tr>
+  <td>{{ infraction.id }}</td>
+  <td>{{ infraction.etudiant?.nom }}</td>
+  <td>{{ infraction.type }}</td>
+  <td>{{ infraction.date | date:'short' }}</td>
+  <td>{{ infraction.punition?.description || 'Non assignée' }}</td>
+  <td>
+    <button (click)="onEdit()">Modifier</button>
+    <button (click)="onDelete()">Supprimer</button>
+  </td>
+</tr>

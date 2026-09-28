@@ -1,0 +1,28 @@
+<div class="user-dashboard">
+  <h2>Bienvenue {{ user?.nom }}</h2>
+
+  <!-- Stats personnelles -->
+  <app-stats-cards [stats]="{ totalInfractions: infractions.length }"></app-stats-cards>
+
+  <!-- Liste des infractions -->
+  <h3>Mes Infractions</h3>
+  <app-infraction-table
+    [infractions]="infractions"
+    [readOnly]="true">
+  </app-infraction-table>
+
+  <!-- Caméra -->
+  <h3>Caméra</h3>
+  <video #video autoplay></video>
+  <canvas #canvas style="display:none;"></canvas>
+  <div class="camera-buttons">
+    <button (click)="startCamera()">Démarrer Caméra</button>
+    <button (click)="capture()">Capturer</button>
+    <button (click)="stopCamera()">Arrêter Caméra</button>
+  </div>
+
+  <div *ngIf="capturedImage" class="captured-image">
+    <h4>Image Capturée :</h4>
+    <img [src]="capturedImage" alt="Capture">
+  </div>
+</div>

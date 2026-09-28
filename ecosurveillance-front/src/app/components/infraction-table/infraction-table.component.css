@@ -1,0 +1,260 @@
+.table-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.infractions-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* En-tête bleu clair comme sur l'image */
+.infractions-table th {
+  background-color: #eff6ff;
+  color: #1e293b;
+  padding: 12px;
+  border: 1px solid #bfdbfe;
+  font-weight: 700;
+}
+
+/* Cellules avec bordures bleues fines */
+.infractions-table td {
+  padding: 12px;
+  border: 1px solid #bfdbfe;
+  font-size: 14px;
+  color: #334155;
+}
+
+.bold-text { font-weight: 700; }
+
+/* Badges de statut (image_062bd4.png) */
+.status-badge {
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.status-badge.termine {
+  background-color: #86efac; /* Vert clair */
+  color: #166534;
+}
+
+.status-badge.en-attente {
+  background-color: #fca5a5; /* Rouge clair */
+  color: #991b1b;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+}
+.btn-terminer {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(34, 197, 94, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* hover moderne */
+.btn-terminer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(34, 197, 94, 0.35);
+}
+
+/* clic */
+.btn-terminer:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 8px rgba(34, 197, 94, 0.2);
+}
+
+/* optionnel : état désactivé si tu veux l’ajouter plus tard */
+.btn-terminer:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+/* base */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* 🟢 TERMINÉE */
+.status-badge.terminee {
+  background-color: #86efac;
+  color: #166534;
+}
+
+/* 🟡 EN COURS */
+.status-badge.en-cours {
+  background-color: #fde68a;
+  color: #92400e;
+}
+
+/* 🔴 EN ATTENTE */
+.status-badge.en-attente {
+  background-color: #fca5a5;
+  color: #991b1b;
+}
+.btn-view {
+  background-color: #eff6ff;
+  color: #1c3878;
+  border: 1px solid #bfdbfe;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view:hover {
+  background-color: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.filter-count {
+  background: rgba(0,0,0,0.15);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+  margin-left: 5px;
+}
+
+.filter-btn.active.filter-tous     { background: #1c3878; color: white; }
+.filter-btn.active.filter-attente  { background: #ef4444; color: white; }
+.filter-btn.active.filter-cours    { background: #f59e0b; color: white; }
+.filter-btn.active.filter-terminee { background: #22c55e; color: white; }
+
+.filter-btn:hover:not(.active) { background: #e2e8f0; }
+
+.no-data {
+  text-align: center;
+  padding: 30px;
+  color: #94a3b8;
+  font-style: italic;
+}
+/* --- Conteneur de la pagination --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 15px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Boutons de page (Chiffres et flèches) --- */
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 6px;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* État : Survol (Hover) */
+.page-btn:hover:not([disabled]) {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+  color: #007bff;
+}
+
+/* État : Page active */
+.page-btn.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #ffffff;
+  cursor: default;
+}
+
+/* État : Désactivé (Flèches quand on est au début/fin) */
+.page-btn[disabled] {
+  background-color: #fafafa;
+  color: #ccc;
+  border-color: #eee;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* --- Texte d'information (ex: 1–5 sur 12) --- */
+.page-info {
+  margin-left: 15px;
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+  border-left: 2px solid #eee;
+  padding-left: 15px;
+}
+
+/* --- Responsive (Mobile) --- */
+@media (max-width: 600px) {
+  .pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .page-info {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 10px;
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .page-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+}

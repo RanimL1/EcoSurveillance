@@ -1,0 +1,14 @@
+# Modèle (trop lourd pour GitHub)
+*.pt
+*.pth
+*.weights
+
+# Dossiers générés
+alertes/
+temp_faces/
+__pycache__/
+*.pyc
+
+# Photos étudiants (données personnelles)
+face_detection/photos_etudiants/*
+!face_detection/photos_etudiants/.gitkeep

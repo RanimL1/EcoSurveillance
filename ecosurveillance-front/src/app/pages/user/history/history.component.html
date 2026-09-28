@@ -1,0 +1,126 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Logo" class="sidebar-logo">
+      <div class="brand-text">
+        <span class="brand-eco">ECO</span>
+        <span class="brand-sub">SURVEILLANCE</span>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/user/my-infractions" class="menu-item">
+        <i class="fas fa-list-ul"></i> Mes infractions
+      </a>
+      <a routerLink="/user/history" class="menu-item active">
+        <i class="fas fa-history"></i> Historiques
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile-container">
+        <div class="user-profile">
+          <img src="assets/user.png" alt="User" class="avatar-img">
+          <div class="user-text">
+              <p class="user-name">{{ user?.nom }}</p>
+              <p class="user-role">Etudiant</p>
+          </div>
+        </div>
+        <button class="logout-btn" (click)="onLogout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-bar">
+      <h2>Historiques</h2>
+      <div class="user-profile">
+        <img src="assets/user.png" alt="User" class="avatar-img">
+        <div class="user-text">
+          <p class="user-name">{{ user?.nom }}</p>
+          <p class="user-role">Etudiant</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-area">
+      <div class="stats-container">
+        <div class="stat-card">
+          <p class="stat-label">Total infractions</p>
+          <div class="stat-value-row">
+            <span class="stat-number">{{ totalInfractions }}</span>
+            <i class="fas fa-file-alt icon-blue"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-label">Infractions terminées</p>
+          <div class="stat-value-row">
+            <span class="stat-number">{{ terminees }}</span>
+            <i class="fas fa-check-circle icon-green"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-label">Infractions en attente</p>
+          <div class="stat-value-row">
+            <span class="stat-number">{{ enAttente }}</span>
+            <i class="fas fa-times-circle icon-red"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-label">Date de la punition la plus proche</p>
+          <div class="stat-value-row">
+            <span class="stat-date">{{ prochainePunition }}</span>
+            <i class="fas fa-calendar-alt icon-black"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="history-table">
+          <thead>
+          <tr>
+            <th>Infraction</th>
+            <th>Preuve</th>
+            <th>Date</th>
+            <th>Punition</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let infraction of infractions">
+            <td>{{ infraction.id }}</td>
+            <td>
+              <button class="btn-preuve" (click)="openProofs(infraction.id)">
+                Voir preuve
+              </button>
+            </td>
+            <td>{{ infraction.infractionDate ? (infraction.infractionDate | date:'dd/MM/yy') : '-' }}</td>
+            <td>{{ infraction.punitionDescription || '-' }}</td>
+            <td>
+                <span class="status-badge" [ngClass]="{
+  'completed': infraction.status === 'TERMINEE',
+  'processing': infraction.status === 'EN_COURS',
+  'waiting':    infraction.status === 'EN_ATTENTE'
+}">
+  {{ infraction.status }}
+</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<app-proof-viewer
+  *ngIf="showModal"
+  [infractionId]="selectedInfractionId!"
+  (closeEvent)="showModal = false">
+</app-proof-viewer>

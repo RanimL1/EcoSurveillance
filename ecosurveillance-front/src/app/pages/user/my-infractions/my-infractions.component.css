@@ -1,0 +1,324 @@
+/* --- Variables de Thème --- */
+:host {
+  --primary-blue: #1c3878;
+  --active-blue: #60a5fa;
+  --bg-light: #f4f7fe;
+  --danger: #ef4444;
+  --success: #22c55e;
+ --warning: #fca311;
+  --text-main: #1e293b;
+  display: block;
+}
+
+/* --- Structure Globale --- */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+/* --- SIDEBAR (Barre Latérale) --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--primary-blue);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+}
+
+.brand {
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-logo { width: 45px; }
+.brand-eco { font-size: 24px; font-weight: 800; display: block; line-height: 1; }
+.brand-sub { font-size: 10px; letter-spacing: 2px; opacity: 0.8; }
+
+.menu { flex: 1; margin-top: 10px; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  gap: 15px;
+  transition: all 0.2s ease;
+}
+
+.menu-item i { width: 20px; font-size: 18px; }
+.menu-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+.menu-item.active { background-color: var(--active-blue); }
+
+/* --- SIDEBAR FOOTER & PROFIL UTILISATEUR --- */
+.sidebar-footer {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Alignement horizontal de l'avatar et du texte */
+.user-profile {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.user-role {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+
+/* --- BOUTON DÉCONNEXION --- */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* --- CONTENU PRINCIPAL & TOP BAR --- */
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+}
+
+.top-bar {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-area { padding: 30px 40px; }
+
+/* --- TABLEAU DESIGN --- */
+.table-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.infractions-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.infractions-table th {
+  padding: 15px;
+  border: 1px solid #93c5fd;
+  background-color: #f0f7ff;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.infractions-table td {
+  padding: 15px;
+  border: 1px solid #93c5fd;
+  color: #333;
+}
+
+/* --- BOUTONS DANS LE TABLEAU --- */
+.btn-view {
+  background-color: #eff6ff;
+  color: #1c3878;
+  border: 1px solid #bfdbfe;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view:hover {
+  background-color: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+.btn-action {
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.disabled-btn {
+  text-decoration: line-through !important;
+  color: #a0aec0 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+/* --- BADGES DE STATUT --- */
+.status-badge {
+  padding: 6px 15px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-badge.waiting { background-color: #fca5a5; color: #991b1b; }
+.status-badge.processing { background-color: #fde68a; color: #92400e; border: 1px solid #ffeeba; }
+.status-badge.completed { background-color: #86efac; color: #166534; }
+.infractions-table td:last-child {
+  background-color: #ebf5ff;
+}
+
+/* --- MODALE (PROOF VIEWER) --- */
+app-proof-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+}
+/* Bouton Valider — même forme que "Voir preuve" */
+.btn-valider {
+  background-color: #eff6ff;
+  color: #1c3878;
+  border: 1px solid #bfdbfe;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-valider:hover:not(:disabled) {
+  background-color: #22c55e;
+  color: white;
+  border-color: #22c55e;
+}
+
+/* État désactivé (status !== 'EN_ATTENTE') */
+.btn-valider.disabled-btn,
+.btn-valider:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+/* ... Vos styles existants pour le layout, sidebar, table ... */
+
+/* --- Styles spécifiques à la pagination --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px;
+  background: #fff;
+  border-top: 1px solid #edf2f7;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  color: #4a5568;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not([disabled]) {
+  border-color: #3182ce;
+  color: #3182ce;
+  background-color: #ebf8ff;
+}
+
+.page-btn.active {
+  background-color: #1a3a6d; /* Bleu foncé de votre charte */
+  color: white;
+  border-color: #1a3a6d;
+}
+
+.page-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-info {
+  margin-left: 12px;
+  font-size: 13px;
+  color: #718096;
+}
+
+
+.disabled-btn {
+  background-color: #e9ecef !important;
+  color: #adb5bd !important;
+  border-color: #dee2e6 !important;
+  cursor: not-allowed !important;
+}

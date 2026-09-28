@@ -1,0 +1,112 @@
+<div class="table-wrapper">
+
+  <div class="filter-bar">
+    <button class="filter-btn filter-tous"
+            [class.active]="selectedStatus === 'TOUS'"
+            (click)="setStatus('TOUS')">
+      Tous <span class="filter-count">{{ countTous }}</span>
+    </button>
+    <button class="filter-btn filter-attente"
+            [class.active]="selectedStatus === 'EN_ATTENTE'"
+            (click)="setStatus('EN_ATTENTE')">
+      En attente <span class="filter-count">{{ countEnAttente }}</span>
+    </button>
+    <button class="filter-btn filter-cours"
+            [class.active]="selectedStatus === 'EN_COURS'"
+            (click)="setStatus('EN_COURS')">
+      En cours <span class="filter-count">{{ countEnCours }}</span>
+    </button>
+    <button class="filter-btn filter-terminee"
+            [class.active]="selectedStatus === 'TERMINEE'"
+            (click)="setStatus('TERMINEE')">
+      Terminée <span class="filter-count">{{ countTerminee }}</span>
+    </button>
+  </div>
+
+  <table class="infractions-table">
+    <thead>
+    <tr>
+      <th>Etudiant</th>
+      <th>Preuve</th>
+      <th>Date</th>
+      <th>Punition</th>
+      <th>Status</th>
+      <th *ngIf="!readOnly">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let infraction of filteredInfractions; let i = index"
+        (click)="onEdit(infraction)"
+        class="clickable-row"
+        title="Cliquer pour modifier">
+
+      <td class="row-number">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+      <td class="bold-text">{{ getNomComplet(infraction) }}</td>
+
+      <td>
+        <button class="btn-view"
+                (click)="openProofs(infraction.id); $event.stopPropagation()">
+          Voir preuve
+        </button>
+      </td>
+
+      <td>{{ infraction.date | date:'dd/MM/yy' }}</td>
+      <td>{{ infraction.punitionDescription || '-' }}</td>
+
+      <td>
+          <span class="status-badge"
+                [ngClass]="{
+                  'terminee':   infraction.status === 'TERMINEE',
+                  'en-cours':   infraction.status === 'EN_COURS',
+                  'en-attente': infraction.status === 'EN_ATTENTE'
+                }">
+            {{ infraction.status }}
+          </span>
+      </td>
+
+      <td *ngIf="!readOnly">
+        <button
+          class="btn-terminer"
+          [disabled]="infraction.status !== 'EN_COURS'"
+          (click)="onChangeStatus($event, infraction.id); $event.stopPropagation()"
+          title="Marquer comme terminée">
+          Valider
+        </button>
+        <span *ngIf="infraction.status === 'TERMINEE'" class="deja-terminee"></span>
+      </td>
+    </tr>
+
+    <tr *ngIf="filteredInfractions.length === 0">
+      <td [attr.colspan]="readOnly ? 6 : 7" class="no-data">
+        Aucune infraction pour ce statut
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button class="page-btn"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)">
+      ‹
+    </button>
+
+    <button *ngFor="let page of pages"
+            class="page-btn"
+            [class.active]="page === currentPage"
+            (click)="goToPage(page)">
+      {{ page }}
+    </button>
+
+    <button class="page-btn"
+            [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)">
+      ›
+    </button>
+
+    <span class="page-info">
+      {{ (currentPage - 1) * pageSize + 1 }}–{{ Math.min(currentPage * pageSize, totalFiltered) }} sur {{ totalFiltered }}
+    </span>
+  </div>
+
+</div>

@@ -1,0 +1,244 @@
+/* --- Variables de Thème --- */
+:host {
+  --primary-blue: #1c3878;
+  --active-blue: #60a5fa;
+  --bg-light: #f4f7fe;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #fca311;
+  --text-main: #1e293b;
+  display: block;
+}
+
+/* --- Structure Globale --- */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--primary-blue);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+}
+
+.brand {
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-logo { width: 45px; }
+.brand-eco { font-size: 24px; font-weight: 800; display: block; line-height: 1; }
+.brand-sub { font-size: 10px; letter-spacing: 2px; opacity: 0.8; }
+
+.menu { flex: 1; margin-top: 10px; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  gap: 15px;
+  transition: all 0.2s ease;
+}
+
+.menu-item i { width: 20px; font-size: 18px; }
+.menu-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+.menu-item.active { background-color: var(--active-blue); }
+
+/* --- SIDEBAR FOOTER & USER PROFILE (CORRECTION ICI) --- */
+.sidebar-footer {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Correction pour l'alignement horizontal */
+.user-profile {
+  display: flex !important;
+  flex-direction: row !important; /* Force l'avatar à côté du texte */
+  align-items: center;
+  gap: 12px;
+}
+
+/* Garde le nom au dessus du rôle */
+.user-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap; /* Empêche le nom de passer à la ligne */
+}
+
+.user-role {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.avatar-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0; /* Empêche l'image de s'écraser */
+}
+
+/* --- BOUTON DÉCONNEXION --- */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* --- CONTENU PRINCIPAL & TABLEAU --- */
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+}
+
+.top-bar {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+}
+
+.top-bar {
+  background-color: #1c3878;
+  color: white;
+  padding: 12px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+/* Conteneur des stats (Cadre Blanc) */
+.content-area {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.stats-container {
+  background-color: white;
+  width: 100%;
+  max-width: 900px;
+  padding: 50px;
+  border-radius: 4px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+}
+
+.chart-section {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.chart-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 25px;
+}
+
+.canvas-container {
+  position: relative;
+  height: 320px; /* Hauteur fixe pour les graphiques */
+  width: 100%;
+}
+
+.separator {
+  border: none;
+  border-top: 1px dashed #e2e8f0;
+  margin: 50px 0;
+}
+.canvas-container {
+  position: relative;
+  height: 300px; /* Obligatoire pour le mode responsive */
+  width: 100%;
+  display: block; /* S'assurer qu'il n'est pas en display:none */
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.period-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.period-btn {
+  padding: 4px 12px;
+  border: 1px solid #3b82f6;
+  border-radius: 20px;
+  background: white;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.period-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.period-btn:hover:not(.active) {
+  background: #eff6ff;
+}

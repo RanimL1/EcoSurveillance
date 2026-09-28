@@ -1,0 +1,23 @@
+<div class="stats-cards">
+  <!-- Carte Infractions -->
+  <div class="card">
+    <h3>Total Infractions</h3>
+    <p>{{ stats.totalInfractions }}</p>
+  </div>
+
+  <!-- Carte Punitions -->
+  <div class="card">
+    <h3>Total Punitions</h3>
+    <p>{{ stats.totalPunitions }}</p>
+  </div>
+
+  <!-- Carte Infractions par type -->
+  <div class="card" *ngIf="stats.infractionsParType">
+    <h3>Infractions par type</h3>
+    <ul>
+      <li *ngFor="let type of stats.infractionsParType | keyvalue">
+        {{ type.key }} : {{ type.value }}
+      </li>
+    </ul>
+  </div>
+</div>

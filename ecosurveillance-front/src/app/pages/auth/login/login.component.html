@@ -1,0 +1,37 @@
+<div class="login-wrapper">
+  <div class="brand-header">
+    <img src="assets/logo.png" alt="Logo Eco Surveillance" class="logo">
+    <div class="brand-text">
+      <h1 class="brand-eco">ECO</h1>
+      <h2 class="brand-sub">SURVEILLANCE</h2>
+    </div>
+  </div>
+
+  <div class="login-card">
+    <h3 class="card-title">Plateforme de surveillance<br>environnementale</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+          [class.error-border]="errorMessage">
+      </div>
+
+      <div class="input-group">
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Mot de passe"
+          [class.error-border]="errorMessage">
+      </div>
+
+      <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" class="btn-login" [disabled]="isLoading">
+        {{ isLoading ? 'Connexion...' : 'Connexion' }}
+      </button>
+    </form>
+  </div>
+</div>

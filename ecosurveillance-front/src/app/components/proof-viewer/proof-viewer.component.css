@@ -1,0 +1,383 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+/* --- MODALE BLANCHE --- */
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  padding: 20px 24px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #1c3878;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.close-modal {
+  cursor: pointer;
+  color: #64748b;
+  font-size: 1.5rem;
+  transition: color 0.2s;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-modal:hover {
+  color: #e74c3c;
+  background: #f0f0f0;
+}
+
+/* --- ÉTATS --- */
+.loading-state, .error-state, .no-proofs {
+  padding: 60px 24px;
+  text-align: center;
+  color: #64748b;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #1c3878;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 16px;
+}
+
+.retry-btn {
+  background: #1c3878;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.retry-btn:hover {
+  background: #2c4a9e;
+}
+
+/* --- GRILLE DE PREUVES --- */
+.proof-grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.proof-card {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid #e2e8f0;
+  position: relative;
+}
+
+.proof-card:hover {
+  background: #1c3878;
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: #1c3878;
+}
+
+.icon-wrapper i {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.proof-card:hover .icon-wrapper i {
+  color: white;
+}
+
+.proof-info span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.proof-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.download-icon {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.download-icon:hover {
+  background: #1c3878;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* --- LIGHTBOX (Aperçu Final) --- */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.media-container {
+  max-width: 100%;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.media-full {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.close-lightbox {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.close-lightbox:hover {
+  background: #e74c3c;
+  color: white;
+  transform: scale(1.1);
+}
+
+.lightbox-footer {
+  margin-top: 20px;
+  display: flex;
+  gap: 16px;
+}
+
+.download-btn, .close-btn-lightbox {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.download-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.close-btn-lightbox {
+  background: #64748b;
+  color: white;
+}
+
+.close-btn-lightbox:hover {
+  background: #475569;
+  transform: translateY(-2px);
+}
+
+/* --- ANIMATION --- */
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar personnalisée */
+.proof-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.proof-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.proof-grid::-webkit-scrollbar-thumb {
+  background: #1c3878;
+  border-radius: 4px;
+}
+
+.proof-grid::-webkit-scrollbar-thumb:hover {
+  background: #2c4a9e;
+}
+
+/* --- STYLES POUR LES MINIATURES --- */
+.proof-preview {
+  cursor: pointer;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proof-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.proof-preview:hover .proof-thumbnail {
+  transform: scale(1.05);
+}
+
+/* Style pour les vidéos en miniature */
+.proof-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Ajustement des cartes pour les miniatures */
+.proof-card {
+  padding: 0;
+  overflow: hidden;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.proof-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  background: white;
+}
+
+.proof-info {
+  padding: 12px;
+  text-align: center;
+  background: white;
+  font-size: 13px;
+  color: #1c3878;
+}
+.video-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+}
+
+.play-icon {
+  font-size: 2rem;
+  color: white;
+}
+
+/* Supprimer les anciens styles qui causaient des conflits */
+.proof-card .icon-wrapper {
+  display: none;
+}

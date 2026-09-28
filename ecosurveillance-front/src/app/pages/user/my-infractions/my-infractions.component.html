@@ -1,0 +1,127 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Logo" class="sidebar-logo">
+      <div class="brand-text">
+        <span class="brand-eco">ECO</span>
+        <span class="brand-sub">SURVEILLANCE</span>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/user/my-infractions" routerLinkActive="active" class="menu-item">
+        <i class="fas fa-list-ul"></i> Mes infractions
+      </a>
+      <a routerLink="/user/history" routerLinkActive="active" class="menu-item">
+        <i class="fas fa-history"></i> Historiques
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile-container">
+        <div class="user-profile">
+          <img src="assets/user.png" alt="User" class="avatar-img">
+          <div class="user-text">
+            <p class="user-name">{{ user?.nom }}</p>
+            <p class="user-role">Etudiant</p>
+          </div>
+        </div>
+        <button class="logout-btn" (click)="onLogout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-bar">
+      <h2>Mes infractions</h2>
+      <div class="user-profile">
+        <img src="assets/user.png" alt="User" class="avatar-img">
+        <div class="user-text">
+          <p class="user-name">{{ user?.nom }}</p>
+          <p class="user-role">Etudiant</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-area">
+      <div class="table-card">
+        <table class="infractions-table">
+          <thead>
+          <tr>
+            <th>Infraction</th>
+            <th>Preuve</th>
+            <th>Date</th>
+            <th>Punition</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let infraction of paginatedInfractions">
+            <td>{{ infraction.id }}</td>
+            <td>
+              <button class="btn-view" (click)="openProofs(infraction.id)">
+                Voir preuve
+              </button>
+            </td>
+            <td>{{ infraction.date | date:'dd/MM/yy' }}</td>
+            <td><strong>{{ infraction.punitionDescription || '-' }}</strong></td>
+            <td>
+                <span class="status-badge"
+                      [ngClass]="{
+                        'completed': infraction.status === 'TERMINEE',
+                        'processing': infraction.status === 'EN_COURS',
+                        'waiting': infraction.status === 'EN_ATTENTE'
+                      }">
+                  {{ infraction.status }}
+                </span>
+            </td>
+            <td>
+              <button
+                class="btn-view btn-valider"
+                [disabled]="infraction.status !== 'EN_ATTENTE'"
+                [class.disabled-btn]="infraction.status !== 'EN_ATTENTE'"
+                (click)="valider(infraction)">
+                Valider
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="infractions.length === 0 && !loading">
+            <td colspan="6" class="no-data">Vous n'avez aucune infraction.</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination" *ngIf="totalPages > 1">
+          <button class="page-btn"
+                  [disabled]="currentPage === 1"
+                  (click)="goToPage(currentPage - 1)">‹</button>
+
+          <button *ngFor="let page of pages"
+                  class="page-btn"
+                  [class.active]="page === currentPage"
+                  (click)="goToPage(page)">
+            {{ page }}
+          </button>
+
+          <button class="page-btn"
+                  [disabled]="currentPage === totalPages"
+                  (click)="goToPage(currentPage + 1)">›</button>
+
+          <span class="page-info">
+            {{ (currentPage - 1) * pageSize + 1 }}–{{ Math.min(currentPage * pageSize, infractions.length) }} sur {{ infractions.length }}
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<app-proof-viewer
+  *ngIf="showModal"
+  [infractionId]="selectedInfractionId!"
+  (closeEvent)="closeModal()">
+</app-proof-viewer>

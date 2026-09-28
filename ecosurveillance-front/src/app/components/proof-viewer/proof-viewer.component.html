@@ -1,0 +1,77 @@
+<div class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Preuves de l'infraction </h3>
+      <span class="close-modal" (click)="closeModal()">✖</span>
+    </div>
+
+    <!-- État de chargement -->
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Chargement des preuves...</p>
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="!loading && error" class="error-state">
+      <p class="error-message">{{ error }}</p>
+      <button class="retry-btn" (click)="reloadPreuves()">Réessayer</button>
+    </div>
+
+    <div *ngIf="!loading && !error && proofs.length > 0" class="proof-grid">
+      <div *ngFor="let proof of proofs" class="proof-card">
+        <!-- Afficher l'image directement sans icône -->
+        <div class="proof-preview" (click)="openPreview(proof)">
+          <img *ngIf="proof.type === 'image'"
+              [src]="proof.url"
+              alt="Preuve"
+              class="proof-thumbnail">
+
+          <video *ngIf="proof.type === 'video'"
+                [src]="proof.url"
+                class="proof-thumbnail"
+                preload="metadata"></video>
+        </div>
+        <div class="proof-info">
+<span>
+  {{ proof.type === 'image'
+      ? '📷 Voir l’image'
+      : '🎬 Regarder la vidéo' }}
+</span>        </div>
+      </div>
+    </div>
+
+    <!-- Message si aucune preuve -->
+    <div *ngIf="!loading && !error && proofs.length === 0" class="no-proofs">
+      <p>Aucune preuve disponible pour cette infraction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox pour l'aperçu -->
+<div class="lightbox" *ngIf="selectedProof" (click)="closePreview()">
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <button class="close-lightbox" (click)="closePreview()">✖</button>
+
+    <div class="media-container">
+      <img *ngIf="selectedProof.type === 'image'"
+           [src]="selectedProof.url"
+           class="media-full"
+           alt="Preuve image">
+
+      <video *ngIf="selectedProof.type === 'video'"
+             controls
+             autoplay
+             class="media-full"
+             controlsList="nodownload">
+        <source [src]="selectedProof.url" type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+    </div>
+
+    <div class="lightbox-footer">
+      <button class="close-btn-lightbox" (click)="closePreview()">
+        Fermer
+      </button>
+    </div>
+  </div>
+</div>

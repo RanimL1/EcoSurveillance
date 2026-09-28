@@ -1,0 +1,32 @@
+<div class="cameras-page">
+  <h2>Gestion des Caméras</h2>
+
+  <button (click)="addCamera()">Ajouter une caméra</button>
+
+  <table class="camera-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Statut</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cam of cameras">
+      <td>{{ cam.id }}</td>
+      <td>{{ cam.nom }}</td>
+      <td>{{ cam.description || '-' }}</td>
+      <td>
+        <app-status-badge [status]="cam.statut || ''"></app-status-badge>
+      </td>
+      <td>
+        <button (click)="editCamera(cam)">Modifier</button>
+        <button (click)="deleteCamera(cam.id)">Supprimer</button>
+        <button (click)="testCamera(cam)">Tester</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

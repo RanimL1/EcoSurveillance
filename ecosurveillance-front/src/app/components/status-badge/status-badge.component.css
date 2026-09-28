@@ -1,0 +1,80 @@
+:host {
+  --primary-blue: #1e3a8a;
+  --active-blue: #60a5fa;
+  --bg-gray: #f0f2f5;
+  --text-main: #1e293b;
+  --terminé-bg: #86efac;
+  --terminé-text: #166534;
+  --attente-bg: #fca5a5;
+  --attente-text: #991b1b;
+}
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-gray);
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--primary-blue);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+}
+
+.brand { padding: 30px 20px; display: flex; align-items: center; gap: 12px; }
+.sidebar-logo { width: 45px; }
+.brand-eco { font-size: 24px; font-weight: 800; display: block; line-height: 1; }
+.brand-sub { font-size: 10px; letter-spacing: 2px; opacity: 0.8; }
+
+.menu { flex: 1; margin-top: 10px; }
+.menu-item {
+  display: flex; align-items: center; padding: 18px 25px;
+  color: white; text-decoration: none; gap: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.menu-item.active { background-color: var(--active-blue); }
+
+.sidebar-footer { padding: 20px; background: rgba(0,0,0,0.2); }
+.user-profile { display: flex; align-items: center; gap: 12px; }
+.avatar-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; }
+
+/* --- MAIN CONTENT & TOP BAR --- */
+.main-content { flex: 1; margin-left: 260px; }
+.top-bar {
+  background-color: var(--primary-blue);
+  color: white; padding: 12px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.user-info-top { display: flex; align-items: center; gap: 10px; }
+.avatar-mini { width: 35px; border-radius: 50%; }
+.top-user-details { display: flex; flex-direction: column; font-size: 12px; }
+
+/* --- TABLE SECTION --- */
+.content-area { padding: 40px; }
+.table-container {
+  background: white; padding: 30px; border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.infractions-table {
+  width: 100%; border-collapse: collapse; text-align: center;
+}
+.infractions-table th {
+  padding: 15px; border: 1px solid #bfdbfe; background-color: #f8fafc;
+  color: var(--text-main); font-weight: 700;
+}
+.infractions-table td {
+  padding: 15px; border: 1px solid #bfdbfe; color: #334155; font-weight: 500;
+}
+
+/* --- BADGES STATUS --- */
+.status-badge {
+  padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+}
+.status-badge.terminé { background-color: var(--terminé-bg); color: var(--terminé-text); }
+.status-badge.attente { background-color: var(--attente-bg); color: var(--attente-text); }

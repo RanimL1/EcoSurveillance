@@ -1,0 +1,208 @@
+/* --- Variables de Thème --- */
+:host {
+  --primary-blue: #1c3878;
+  --active-blue: #60a5fa;
+  --bg-light: #f4f7fe;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #fca311;
+  --text-main: #1e293b;
+  display: block;
+}
+
+/* --- Structure Globale --- */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--primary-blue);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+}
+
+.brand {
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-logo { width: 45px; }
+.brand-eco { font-size: 24px; font-weight: 800; display: block; line-height: 1; }
+.brand-sub { font-size: 10px; letter-spacing: 2px; opacity: 0.8; }
+
+.menu { flex: 1; margin-top: 10px; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  gap: 15px;
+  transition: all 0.2s ease;
+}
+
+.menu-item i { width: 20px; font-size: 18px; }
+.menu-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+.menu-item.active { background-color: var(--active-blue); }
+
+/* --- SIDEBAR FOOTER & USER PROFILE (CORRECTION ICI) --- */
+.sidebar-footer {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Correction pour l'alignement horizontal */
+.user-profile {
+  display: flex !important;
+  flex-direction: row !important; /* Force l'avatar à côté du texte */
+  align-items: center;
+  gap: 12px;
+}
+
+/* Garde le nom au dessus du rôle */
+.user-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap; /* Empêche le nom de passer à la ligne */
+}
+
+.user-role {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.avatar-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0; /* Empêche l'image de s'écraser */
+}
+
+/* --- BOUTON DÉCONNEXION --- */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* --- CONTENU PRINCIPAL & TABLEAU --- */
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+}
+
+.top-bar {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- CONTENU PRINCIPAL --- */
+.main-content {
+  flex: 1;
+  margin-left: 260px; /* Compense la largeur de la sidebar */
+}
+
+/* Barre de titre bleue en haut */
+.top-bar {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar h2 { margin: 0; font-size: 26px; font-weight: 500; }
+.user-info-top { display: flex; align-items: center; gap: 12px; }
+/* --- STYLE DU TABLEAU ETUDIANT (image_10a3a1) --- */
+
+.content-area {
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Le cadre bleu ciel qui entoure le tableau */
+.table-frame {
+  background-color: white;
+  border: 1px solid #60a5fa; /* Bordure bleue ciel */
+  padding: 50px; /* Espace entre le cadre et le tableau */
+  width: 90%;
+  max-width: 1000px;
+}
+
+.etudiant-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* En-tête avec fond bleu très clair */
+.etudiant-table th {
+  background-color: #e0efff;
+  color: #000;
+  padding: 15px;
+  border: 1px solid #60a5fa;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+/* Cellules avec texte en gras et bordures bleues */
+.etudiant-table td {
+  padding: 15px;
+  border: 1px solid #60a5fa;
+  text-align: center;
+  font-weight: 700;
+  color: #000;
+  font-size: 14px;
+}
+
+.sidebar-footer { margin-top: auto; padding: 20px; background: rgba(0,0,0,0.1); }
+.user-profile { display: flex; align-items: center; gap: 12px; }
+.avatar-img, .avatar-mini { width: 35px; height: 35px; border-radius: 50%; border: 1px solid white; }

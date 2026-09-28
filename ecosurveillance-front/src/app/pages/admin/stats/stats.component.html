@@ -1,0 +1,87 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Logo" class="sidebar-logo">
+      <div class="brand-text">
+        <span class="brand-eco">ECO</span>
+        <span class="brand-sub">SURVEILLANCE</span>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a [routerLink]="'/admin/dashboard'" routerLinkActive="active" class="menu-item">
+        <i class="fas fa-th-large"></i> Tableau de bord
+      </a>
+      <a [routerLink]="'/admin/infractions'" routerLinkActive="active" class="menu-item">
+        <i class="fas fa-minus-circle"></i> Infractions
+      </a>
+      <a [routerLink]="'/admin/users'" routerLinkActive="active" class="menu-item">
+        <i class="fas fa-users"></i> Etudiants
+      </a>
+      <a [routerLink]="'/admin/stats'" routerLinkActive="active" class="menu-item">
+        <i class="fas fa-chart-line"></i> Statistiques
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile-container">
+        <div class="user-profile">
+          <img src="assets/admin.jpg" alt="Admin" class="avatar-img">
+          <div class="user-text">
+            <p class="user-name">{{ currentUser?.nom }}</p>
+          </div>
+        </div>
+
+        <button class="logout-btn" (click)="onLogout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-bar">
+      <h2>Statistiques</h2>
+      <div class="user-profile">
+        <img src="assets/admin.jpg" alt="Admin" class="avatar-img">
+        <div class="user-text">
+          <p class="user-name">{{ currentUser?.nom }}</p>
+          <p class="user-role">Admin</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-area">
+      <div class="stats-container">
+
+        <div class="chart-section">
+          <h3 class="chart-title">Infractions par status</h3>
+          <div class="canvas-container">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="chart-section">
+          <div class="chart-header">
+            <h3 class="chart-title">Évolution sur {{ selectedPeriod === '1M' ? '1 Mois' : selectedPeriod === '2M' ? '2 Mois' : selectedPeriod === '3M' ? '3 Mois' : '6 Mois' }}</h3>
+            <div class="period-buttons">
+              <button *ngFor="let p of periods"
+                      class="period-btn"
+                      [class.active]="selectedPeriod === p.value"
+                      (click)="changePeriod(p.value)">
+                {{ p.label }}
+              </button>
+            </div>
+          </div>
+          <div class="canvas-container">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</div>
